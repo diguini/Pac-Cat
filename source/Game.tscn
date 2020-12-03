@@ -9,7 +9,8 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
-scaleFactor = 3.1
+numAgents = 50
+scaleFactor = 1.0
 DogObj = ExtResource( 4 )
 CatObj = ExtResource( 3 )
 MapObj = ExtResource( 2 )
@@ -45,3 +46,8 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.001
 autostart = true
+
+[node name="TimerForNewGeneration" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+[connection signal="timeout" from="TimerForNewGeneration" to="." method="_on_TimerForNewGeneration_timeout"]

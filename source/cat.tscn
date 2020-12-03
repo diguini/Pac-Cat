@@ -7,22 +7,22 @@
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 64, 64 )
+region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 64, 64, 64, 64 )
+region = Rect2( 192, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 64, 64 )
+region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 192, 64, 64, 64 )
+region = Rect2( 64, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
@@ -48,12 +48,12 @@ region = Rect2( 128, 64, 64, 64 )
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
-"name": "right",
+"name": "left",
 "speed": 3.0
 }, {
 "frames": [ SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
-"name": "left",
+"name": "right",
 "speed": 3.0
 }, {
 "frames": [ SubResource( 5 ), SubResource( 6 ) ],
@@ -93,8 +93,13 @@ gravity_vec = Vector2( 0, 0 )
 position = Vector2( -2.56671, 0.256668 )
 shape = SubResource( 10 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="TimerByStuck" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="TimerByRepeat" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="TimerByStuck" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="TimerByRepeat" to="." method="_on_TimerByRepeat_timeout"]

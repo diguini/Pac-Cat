@@ -10,6 +10,7 @@ var target = Vector2()
 var velocity = Vector2()
 var posOnMap = Vector2()
 var Dead = false
+var MovementCompleted = false
 export (int) var speed = 400
 export (int) var initialSpeed = 400
 
@@ -28,10 +29,12 @@ func _ready() -> void:
 func setScaleFactor(scale):
 	speed= scale * initialSpeed
 
+#Movimentação de ambos os personagens
 func _physics_process(delta):
 	if Dead:
 		return
 	velocity = (target - position).normalized() * speed
+	#print(velocity)
 	if Dir == MoveDirection.RIGHT:
 		get_child(0).play("right")
 	if Dir == MoveDirection.LEFT:
@@ -40,14 +43,15 @@ func _physics_process(delta):
 		get_child(0).play("up")
 	elif Dir == MoveDirection.DOWN:
 		get_child(0).play("down")
-	if (target - position).length() > 10:
+	if (target - position).length() > 5:
 		velocity = move_and_slide(velocity)
 	else:
+		#print("completou movimento")
 		Moving = false
 	
 
-
-func _update(tileOnMap: String, scale: float = 1) -> void:
+#Tomada de decisão aleatória do cachorro
+func _update(tileOnMap: String) -> void:
 	if Moving:
 		return
 	if tileOnMap == "l":
